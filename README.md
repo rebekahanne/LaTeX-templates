@@ -1,4 +1,4 @@
-# tex-templates
+# Tex Templates
 
 ## Document
 
