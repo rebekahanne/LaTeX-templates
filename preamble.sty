@@ -76,6 +76,7 @@
 % \usepackage{natbib}
 %\usepackage{biblatex}
 
+% comment out if lame
 \usepackage[
     backend=biber,
     style=authoryear,
@@ -166,7 +167,7 @@
 \usepackage{xfrac}
 
 % Equation numbering
-\numberwithin{equation}{section}
+%\numberwithin{equation}{section}
 
 % Framed theorems
 \usepackage{mdframed}
@@ -175,12 +176,14 @@
 \usepackage{subfiles}
 
 % tikz from matplotlib
-\usepackage{tikz}
-\usepackage[utf8]{inputenc}
-\usepackage{pgfplots}
-\pgfplotsset{compat=newest}
-\usepgfplotslibrary{groupplots}
-\usepgfplotslibrary{dateplot}
+\usepackage{tikz-cd}
+\usetikzlibrary{cd}
+%\usepackage{tikz}
+%\usepackage[utf8]{inputenc}
+%\usepackage{pgfplots}
+%\pgfplotsset{compat=newest}
+%\usepgfplotslibrary{groupplots}
+%\usepgfplotslibrary{dateplot}
 %\usepackage{fontspec}  % optional
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -208,11 +211,11 @@
 % So pages will break inside long equation environments
 \allowdisplaybreaks
 % Font
-\usepackage{mathpazo}
-\linespread{1.05}
+%\usepackage{mathpazo}
+\linespread{1.3}
 %\usepackage{courier}
 % Geometry
-\geometry{left=1in,right=1in,top=1in,bottom=1in}
+\geometry{letterpaper, margin=2.54cm}
 % Counters
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{3}
@@ -329,7 +332,7 @@
 % stochastic dominance
 \newcommand{\lesd}{\preceq_{\textrm{SD}}}
 
-% Set builder (use \Set ultimately and separate by ;)
+% Set builder (use \Set ultimately and separate by ;
 \DeclarePairedDelimiterX{\set}[1]{\{}{\}}{\setargs{#1}}
 \NewDocumentCommand{\setargs}{>{\SplitArgument{1}{;}}m}
 {\setargsaux#1}
@@ -386,26 +389,6 @@
 % PDE
 \newcommand{\pa}{\partial}
 
-% Shortcut greek
-\def\a{\alpha}
-\def\b{\beta}
-\def\g{\gamma}
-\def\D{\Delta}
-\def\d{\delta}
-\def\z{\zeta}
-\def\k{\kappa}
-\def\l{\lambda}
-\def\n{\nu}
-\def\r{\rho}
-\def\s{\sigma}
-\def\t{\tau}
-\def\x{\xi}
-\def\w{\omega}
-\def\W{\Omega}
-% Nice greek
-\newcommand{\p}{\varphi}
-\newcommand{\e}{\varepsilon}
-
 % Shorcut vectors
 \def\vx{\vect{x}}
 \def\vy{\vect{y}}
@@ -413,6 +396,80 @@
 \def\vb{\vect{b}}
 \def\vn{\vect{n}}
 \def\vF{\vect{F}}
+
+% Shortcut modified capitals
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\bB}{\mathbb{B}}
+\newcommand{\bC}{\mathbb{C}}
+\newcommand{\bD}{\mathbb{D}}
+\newcommand{\bE}{\mathbb{E}}
+\newcommand{\bF}{\mathbb{F}}
+\newcommand{\bG}{\mathbb{G}}
+\newcommand{\bH}{\mathbb{H}}
+\newcommand{\bI}{\mathbb{I}}
+\newcommand{\bJ}{\mathbb{J}}
+\newcommand{\bK}{\mathbb{K}}
+\newcommand{\bM}{\mathbb{M}}
+\newcommand{\bN}{\mathbb{N}}
+\newcommand{\bO}{\mathbb{O}}
+\newcommand{\bP}{\mathbb{P}}
+\newcommand{\bQ}{\mathbb{Q}}
+\newcommand{\bR}{\mathbb{R}}
+\newcommand{\bS}{\mathbb{S}}
+\newcommand{\bT}{\mathbb{T}}
+\newcommand{\bU}{\mathbb{U}}
+\newcommand{\bV}{\mathbb{V}}
+\newcommand{\bX}{\mathbb{X}}
+\newcommand{\bY}{\mathbb{Y}}
+\newcommand{\bZ}{\mathbb{Z}}
+
+\newcommand{\sA}{\mathsf{A}}
+\newcommand{\sC}{\mathsf{C}}
+\newcommand{\sD}{\mathsf{D}}
+\newcommand{\sE}{\mathsf{E}}
+\newcommand{\sF}{\mathsf{F}}
+\newcommand{\sG}{\mathsf{G}}
+\newcommand{\sH}{\mathsf{H}}
+\newcommand{\sI}{\mathsf{I}}
+\newcommand{\sJ}{\mathsf{J}}
+\newcommand{\sK}{\mathsf{K}}
+\newcommand{\sM}{\mathsf{M}}
+\newcommand{\sN}{\mathsf{N}}
+\newcommand{\sO}{\mathsf{O}}
+\newcommand{\sP}{\mathsf{P}}
+\newcommand{\sQ}{\mathsf{Q}}
+\newcommand{\sR}{\mathsf{R}}
+\newcommand{\sS}{\mathsf{S}}
+\newcommand{\sT}{\mathsf{T}}
+\newcommand{\sU}{\mathsf{U}}
+\newcommand{\sV}{\mathsf{V}}
+\newcommand{\sX}{\mathsf{X}}
+\newcommand{\sY}{\mathsf{Y}}
+\newcommand{\sZ}{\mathsf{Z}}
 
 \newcommand{\CC}{\mathbbm C}
 \newcommand{\FF}{\mathbbm F}
@@ -427,37 +484,6 @@
 \newcommand{\ZZ}{\mathbbm Z}
 \newcommand{\II}{\mathbbm I}
 \renewcommand{\SS}{\mathbbm S}
-
-% Expectation/Probability
-\newcommand{\ee}[1]{\mathop{{}\mathbb{E}}\parens{#1}}
-\newcommand{\pp}[1]{\mathop{{}\mathbb{P}}\parens{#1}}
-
-\newcommand{\GG}{\mathsf G}
-\newcommand{\XX}{\mathsf X}
-\renewcommand{\AA}{\mathsf A}
-\newcommand{\YY}{\mathsf Y}
-\newcommand{\ZZZ}{\mathsf Z}
-
-\newcommand{\aA}{\mathscr A}
-\newcommand{\cC}{\mathscr C}
-\newcommand{\iI}{\mathscr I}
-\newcommand{\eE}{\mathscr E}
-\newcommand{\fF}{\mathscr F}
-\newcommand{\rR}{\mathscr R}
-\newcommand{\sS}{\mathscr S}
-\newcommand{\cG}{\mathscr G}
-
-\newcommand{\pP}{\mathcal P}
-\newcommand{\vV}{\mathcal V}
-\newcommand{\dD}{\mathcal D}
-\newcommand{\mM}{\mathcal M}
-\newcommand{\nN}{\mathcal N}
-\newcommand{\oO}{\mathcal O}
-\newcommand{\gG}{\mathcal G}
-\newcommand{\hH}{\mathcal H}
-\newcommand{\tT}{\mathcal T}
-\newcommand{\bB}{\mathcal B}
-\newcommand{\lL}{\mathcal L}
 
 % Common collections
 \def\cA{\col{A}}
@@ -483,9 +509,9 @@
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\proj}{proj}
 \DeclareMathOperator{\rank}{rank}
-% \DeclareMathOperator{\cov}{Cov}
-\DeclareMathOperator{\corr}{Corr}
-% \DeclareMathOperator{\var}{Var}
+\DeclareMathOperator{\cov}{\bC ov}
+\DeclareMathOperator{\corr}{\bC orr}
+\DeclareMathOperator{\var}{\bV ar}
 \DeclareMathOperator{\mse}{mse}
 \DeclareMathOperator{\se}{se}
 \DeclareMathOperator{\row}{row}
@@ -503,14 +529,14 @@
 
 \DeclareMathOperator{\supp}{Supp}
 
-\newcommand{\var}[1]{\text{Var}\parens{#1}}
-\newcommand{\cov}[1]{\text{Cov}\parens{#1}}
+%\newcommand{\var}[1]{\text{Var}\parens{#1}}
+%\newcommand{\cov}[1]{\text{Cov}\parens{#1}}
 % \newcommand{\corr}[1]{\text{Corr}\parens{#1}}
-\renewcommand{\exp}[1]{\text{exp}\braces{#1}}
+\renewcommand{\exp}[1]{\text{exp}\parens{#1}}
 
 % Distributions
 % Normal
-\newcommand{\normal}[2]{\nN\parens{#1, #2}}
+\newcommand{\normal}[2]{\cN\parens{#1, #2}}
 
 
 % \end{extract*}
