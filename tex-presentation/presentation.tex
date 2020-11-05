@@ -1,0 +1,126 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usetheme[
+  outer/progressbar=frametitle,
+  outer/numbering=none
+]{metropolis}
+
+\usepackage{math_preamble}
+\usepackage{beamerhighlight}
+
+\definecolor{maroon}{rgb}{0.5, 0.0, 0.0}
+\definecolor{darkmidnightblue}{rgb}{0.0, 0.2, 0.4}
+\definecolor{cadetgrey}{rgb}{0.57, 0.64, 0.69}
+
+\setbeamercolor{frametitle}{bg=darkmidnightblue}
+\setbeamercolor{progress bar}{fg=cadetgrey, bg=cadetgrey}
+
+\title{Presentation}
+\date{\today}
+\author{Rebekah Dix}
+\institute{MIT}
+% \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
+
+% tikz
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage{yhmath}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{siunitx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.pathmorphing}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Introduction}
+
+\end{frame}
+
+\begin{frame}{Beamer Highlight (from documentation)}
+\setcounter{beamerpauses}{2}
+
+\uncover<+->{Suspendisse potenti.}
+
+\begin{equation*}
+%% default styles
+\commentmathwithtext<+->[%position={(60:2cm)},
+        append text node style={},
+        append math node style={},
+        append link style={},
+        append to style={}
+        ]{\int_a^b f(x) dx}{This is an integral} 
++ B = C + 
+%% change relative position
+%% change the style of the text/comment node
+\commentmathwithtext<+>[position={(30:3cm)},
+        append text node style={align=left,text width=10em},
+        append math node style={},
+        append link style={},
+        append to style={}
+        ]{\sum_{n=0}^{\infty} a_n}{This is a sum on $a_n$, from $n=0$ to $n=\infty$}
++ \sum_{n=0}^{\infty} b_n
+\end{equation*}
+
+\begin{equation*}
+%% change relative position
+%% change the style of the text/comment node
+%% change the style of the math node
+%% change the style of the background node
+%% change the style of the link and the "to"
+\commentmathwithtext<+>[position={(0:4.5cm)},
+        append text node style={text=structure,draw=structure,fill=structure!10,line width=1pt,outer sep=3pt},
+        append math node style={outer sep=2pt,draw=structure,fill=structure!10,line width=1pt},
+        append link style={structure,line width=2pt,->},
+        append to style={bend right=18},
+        math color=structure
+        ]{\int_a^b f(x) dx}{\bfseries This is the same integral}  = 0
+\end{equation*}
+
+{%% begin of a group where the colors are changed
+\colorlet{mathnodecolor}{magenta!60}
+\begin{equation*}
+A + A + 
+%% change relative position
+%% change the style of the text/comment node
+%% change the style of the math node
+%% change the style of the background node
+%% change the style of the link
+\commentmathwithtext<+>[position={(-3cm,1.1cm)},
+                append text node style={fill=mathnodecolor!50,inner sep=5pt},
+                append math node style={fill=none,draw=mathnodecolor,line width=1pt},
+                append link style={decorate,decoration={snake,amplitude=1pt}},
+                append to style={},
+                math color=mathnodecolor
+                ]{A}{This is just $A$} + A + A = 0
+\end{equation*}
+}% end of the group for change of colors
+
+Praesent ante turpis, ultrices condimentum fringilla sed. 
+
+\uncover<+->{Donec nec ipsum et ipsum pellentesque dictum in vel turpis. }
+
+
+
+\end{frame}
+
+\begin{frame}
+    \begin{center}
+        \LARGE{Thank You!}
+    \end{center}
+\end{frame}
+
+\end{document}

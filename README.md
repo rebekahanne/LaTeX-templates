@@ -1,7 +1,5 @@
-# Tex Templates
+# LaTeX Templates
 
-## Document
+## TeX Note
 
-preamble.sty
-
-## Presentation
+## TeX Presentation

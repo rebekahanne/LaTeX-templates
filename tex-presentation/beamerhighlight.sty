@@ -1,0 +1,231 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerhighlight}[2012/01/19 v1.0]
+
+% Copyright 2012 by Thierry Masson, http://science.thilucmic.fr
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+% 
+% Changelog
+% 2012/01/19 Initial version
+
+%% This package can only be used with beamer and it requires tikz.
+%% It defines 3 sets of commands:
+%% 1- a command to annotate a part of a formula
+%%		\commentmathwithtext
+%% 2- commands to place tikz nodes on top of parts of formulas
+%%		\inserthightlightnode, \hightlightnode
+%% 3- a command to install a fleeting box
+%%		\fleetingbox
+
+%% These commands are illustrated in the tex file distributed with this package.
+%% Comments are given in this example file.
+
+
+
+\RequirePackage{tikz}
+
+
+\usetikzlibrary{fit,backgrounds,calc}
+ 
+
+%% ANNOTATION OF MATH FORMULA
+%% default colors, can be changed by user.
+%% color for the background behind the mathematical node
+\colorlet{mathnodecolor}{structure!30}
+%% color for the text/comment node
+\colorlet{mathtextcolor}{black}
+
+
+%% default style of the non visible node which contains the mathematical expression
+\tikzset{display math/.style={execute at begin node=$\displaystyle,
+							execute at end node=$,
+							rectangle,
+							line width=0pt,
+							inner sep=0pt,
+							outer sep=0pt,
+							}}
+
+
+%% default style of the background node behind the non visible mathematical node							
+\tikzset{math node style/.style={rectangle,
+								inner sep=1.5pt,
+								outer sep=0pt,
+								rounded corners=2pt,
+								line width=0pt,
+								fill=mathnodecolor}}
+
+
+%% default style of the text/comment node
+\tikzset{text node style/.style={rectangle,
+								inner sep=2.5pt,
+								outer sep=0pt,
+							 	rounded corners=2pt,
+								line width=0pt,
+								draw=none,
+								fill=mathnodecolor}}
+
+
+%% default style of the link between the mathematical node and the background node
+\tikzset{link style/.style={line width=1pt,draw=mathnodecolor}}
+
+
+%% default style of the "to" command in the link
+\tikzset{to style/.style={}}
+
+
+%% keys to define/append the styles of the objects, to be used in the tex file by the author
+%% key to define the relative position of the math node to the text/comment node
+%% best choice is to use polar coordinates
+\tikzset{position/.initial={(45:2cm)}}
+
+%% key to append style to the background node behind the mathematical node
+\tikzset{append math node style/.code={\tikzset{math node style/.append style={#1}}}}
+\tikzset{append math node style/.initial={}}
+
+%% key to append style to the text/comment node
+\tikzset{append text node style/.code={\tikzset{text node style/.append style={#1}}}}
+\tikzset{append text node style/.initial={}}
+
+%% key to append style to the link
+\tikzset{append link style/.code={\tikzset{link style/.append style={#1}}}}
+\tikzset{append link style/.initial={}}
+
+%% key to append style to the "to" command in the link
+\tikzset{append to style/.code={\tikzset{to style/.append style={#1}}}}
+\tikzset{append to style/.initial={}}
+
+%% key to define the color of the mathematical expression
+\tikzset{math color/.code={\colorlet{mathtextcolor}{#1}}}
+
+
+%% definition of the \commentmathwithtext command 
+\newcommand<>{\commentmathwithtext}[3][]{%
+{\pgfkeys{/tikz/.cd,#1}% keys initialization
+\pgfkeysgetvalue{/tikz/position}{\position}%
+%
+\tikz[baseline=(mathnode.base)]{%
+%
+\temporal#4%
+{% before
+% mathematical node
+\node[display math,outer sep=0pt] (mathnode) {#2};% 
+}% end of before
+{% default
+% mathematical node
+\node[display math,outer sep=0pt,text=mathtextcolor] (mathnode) {#2};% 
+%\only#4{
+\begin{scope}[overlay]
+\begin{pgfonlayer}{background}
+% the background node behind the mathematical node
+	\node[fit=(mathnode),math node style,align=left] (mathnodebg) {};
+\end{pgfonlayer}
+% this is the only solution I have found to transform "\position" into a tikz coordinate
+\node[align=left] (positionpt) at \position {};
+% the text/comment node
+\node[text node style] (textnode) at ($(mathnode)+(positionpt)$) {#3};
+% link between the text/commend node and the background behind the mathematcal node
+\draw[link style] (textnode) to[to style] (mathnodebg);% 
+\end{scope}%
+}% end of default
+{% after
+\node[display math,outer sep=0pt] (mathnode) {#2};% noeud mathématique
+}% end of after
+%}% end of only
+%
+}% fend of tikz
+}}% end of \commentmathwithtext
+
+
+
+
+
+
+
+%% HIGHLIGHT NODE
+%% default style for the frame
+%% Don't use a background color: the tikz picture is placed on top of the text to highlight
+\tikzset{highlight node style/.style={rectangle,
+								inner sep=3pt,
+								outer sep=0pt,
+							 	rounded corners=3pt,
+								line width=1.5pt,
+								draw=red,
+								fill=none,
+								}}
+
+%% key to append style to the frame, to be used in the tex file by the author
+\tikzset{append highlight node style/.code={\tikzset{highlight node style/.append style={#1}}}}
+\tikzset{append highlight node style/.initial={}}
+
+
+%% The command to define and give a name to a node around the text to highlight
+%% It is preferable to put nodes at different places around the total expression
+%% The first argument is the name of the node
+%% The second argument should be the an empty box
+%% This command takes no place at the end
+\newcommand{\inserthightlightnode}[3][]{%
+\tikz[remember picture,overlay,baseline=(#2.base)]{%
+\node[rectangle,align=left,inner sep=0pt, outer sep=0pt,#1] (#2) {#3};%
+}}
+
+%% The command to draw the frame.
+%% Use the names of the nodes in parenthesis (nodes defined by the \inserthightlightnode command)
+%% The frame will fit all the nodes.
+%% This command can be placed anywhere in the slide, after the corresponding \inserthightlightnode command
+%% It can take some vertical space: put it at the end of a line.
+\newcommand<>{\hightlightnode}[2][]{%
+\temporal#3%
+{% before
+}% end of before
+{% default
+\tikz[remember picture,overlay]{%
+\pgfkeys{/tikz/.cd,#1}% keys initialization
+\node[highlight node style,align=left,fit=#2,#1] {};%
+}}% end of default
+{% after
+}% end of after
+}
+
+
+
+
+
+
+
+%% FLEETING BOX
+%% default style of the fleeting box
+\tikzset{fleeting box style/.style={%
+					outer sep=0pt,
+					inner sep=5pt,
+					line width=0pt,
+					color=black,
+					font=\small,
+					align=left,
+					fill=structure!20,
+					draw=none,
+					rectangle,
+					rounded corners=2mm,
+					anchor=north east,
+					yshift=-1ex,
+					text width=0.9\linewidth,
+}}
+
+%% key to append style of the fleeting box, to be used in the tex file by the author
+\tikzset{append fleeting box style/.code={\tikzset{fleeting box style/.append style={#1}}}}
+\tikzset{append fleeting box style/.initial={}}
+
+%% the \fleetingbox command
+\newcommand<>{\fleetingbox}[2][]{%
+\uncover#3{%
+\hfill\raisebox{0pt}[0pt][0pt]{% push the 0-dim box to the right of the current line
+\tikz[overlay]{%
+\node[fleeting box style,#1] (resultatbox) {#2};
+}% end of tikz
+}% end of raisebox
+\par
+}}% end of fleetingbox
+
+

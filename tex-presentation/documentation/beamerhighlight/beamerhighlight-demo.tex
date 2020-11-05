@@ -1,0 +1,255 @@
+\documentclass[10pt]{beamer}
+%!TEX encoding = UTF-8 Unicode
+%!TEX TS-program = pdflatex
+%!TEX spellcheck = English
+\usepackage{etex}
+\usepackage[utf8]{inputenc}
+\usepackage[TS1,T1]{fontenc}
+\usepackage{xspace}
+\usepackage{amsmath,amssymb}
+\usepackage[english]{babel}
+%\usepackage{tikz}
+
+\usepackage{lmodern}
+
+\usepackage{beamerhighlight}
+
+
+%% libraries for snake paths
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.pathmorphing}
+
+%% library for star node
+\usetikzlibrary{shapes.geometric}
+
+%% library for computation of coordinates
+\usetikzlibrary{calc}
+
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Comment of math terms, 1}
+\setcounter{beamerpauses}{2}
+
+\uncover<+->{Suspendisse potenti.}
+
+\begin{equation*}
+%% default styles
+\commentmathwithtext<+->[%position={(60:2cm)},
+		append text node style={},
+		append math node style={},
+		append link style={},
+		append to style={}
+		]{\int_a^b f(x) dx}{This is an integral} 
++ B = C + 
+%% change relative position
+%% change the style of the text/comment node
+\commentmathwithtext<+>[position={(30:3cm)},
+		append text node style={align=left,text width=10em},
+		append math node style={},
+		append link style={},
+		append to style={}
+		]{\sum_{n=0}^{\infty} a_n}{This is a sum on $a_n$, from $n=0$ to $n=\infty$}
++ \sum_{n=0}^{\infty} b_n
+\end{equation*}
+
+\begin{equation*}
+%% change relative position
+%% change the style of the text/comment node
+%% change the style of the math node
+%% change the style of the background node
+%% change the style of the link and the "to"
+\commentmathwithtext<+>[position={(0:4.5cm)},
+		append text node style={text=structure,draw=structure,fill=structure!10,line width=1pt,outer sep=3pt},
+		append math node style={outer sep=2pt,draw=structure,fill=structure!10,line width=1pt},
+		append link style={structure,line width=2pt,->},
+		append to style={bend right=18},
+		math color=structure
+		]{\int_a^b f(x) dx}{\bfseries This is the same integral}  = 0
+\end{equation*}
+
+{%% begin of a group where the colors are changed
+\colorlet{mathnodecolor}{magenta!60}
+\begin{equation*}
+A + A + 
+%% change relative position
+%% change the style of the text/comment node
+%% change the style of the math node
+%% change the style of the background node
+%% change the style of the link
+\commentmathwithtext<+>[position={(-3cm,1.1cm)},
+				append text node style={fill=mathnodecolor!50,inner sep=5pt},
+				append math node style={fill=none,draw=mathnodecolor,line width=1pt},
+				append link style={decorate,decoration={snake,amplitude=1pt}},
+				append to style={},
+				math color=mathnodecolor
+				]{A}{This is just $A$} + A + A = 0
+\end{equation*}
+}% end of the group for change of colors
+
+Praesent ante turpis, ultrices condimentum fringilla sed. 
+
+Vestibulum ante ipsum primis in faucibus orci luctus. 
+
+Phasellus felis augue, consequat volutpat bibendum id, ultrices a metus.
+
+\uncover<+->{Donec nec ipsum et ipsum pellentesque dictum in vel turpis. }
+
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Comment of math terms, 2}
+
+\uncover<+->{A test with a star}
+
+{%% beginning of a group to change the style
+\colorlet{mathnodecolor}{violet!40}
+\tikzset{append text node style={inner sep=4pt,circle}}
+\tikzset{append math node style={inner sep=0.5pt,circle}}
+\tikzset{append link style={line width=1pt}}
+
+\begin{equation*}
+\begin{pmatrix}
+\commentmathwithtext<+->[position={(135:2cm)}]{1}{Un $1$}
+ & 
+\commentmathwithtext<+->[position={(90:2cm)}]{2}{Un $2$}
+ & 
+\commentmathwithtext<+->[position={(45:2cm)}]{3}{Un $3$}
+ \\
+\commentmathwithtext<+->[position={(180:2cm)}]{4}{Un $4$}
+ &
+{\colorlet{mathnodecolor}{orange!60}
+%% change only this one
+\commentmathwithtext<+->[position={(58:4cm)},
+				append text node style={inner sep=0pt,shape=star, star points=6,star point ratio=2}
+				]{5}{Un $5$}
+}
+ &
+\commentmathwithtext<+->[position={(0:2cm)}]{6}{Un $6$}
+ \\
+\commentmathwithtext<+->[position={(225:2cm)}]{7}{Un $7$}
+ &
+\commentmathwithtext<+->[position={(270:2cm)}]{8}{Un $8$}
+ &
+\commentmathwithtext<+->[position={(315:2cm)}]{9}{Un $9$}
+\end{pmatrix}
+\end{equation*}
+}%% end of the group for change of style
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Comment of math terms, 3}
+
+\uncover<+->{A big formula where some terms are commented.}
+
+{%% beginning of a group to change the style
+\colorlet{mathnodecolor}{orange!60}
+\tikzset{math color=orange}
+\tikzset{append text node style={outer sep=2pt,text=structure,font=\bfseries\mathversion{bold}}}
+\tikzset{append math node style={inner sep=1pt,outer sep=2pt,fill=none}}
+\tikzset{append link style={>=latex,->,orange!80,line width=1.5pt}}
+
+\uncover<+->{\begin{multline*}
+H = \int_{-\infty}^L \frac{dx}{2\pi} \left[ 
+\frac{v_F}{%
+\commentmathwithtext<+->[position={(250:2cm)},
+		append text node style={align=left,text width=13.2em},
+			]{K^2}{Luttinger parameter\\ ($K=1$ without interactions)}
+} \left(\frac{\partial \phi}{\partial x} \right)^2 + v_F \left(\frac{\partial \theta}{\partial x} \right)^2 \right]
+- 
+\commentmathwithtext<+->[position={(40:2cm)}]{V}{Backscattering}
+\cos(2 \phi(x=0)) \\
++ \frac{1}{\pi^2} E_C \left[ \phi(x=0) - \left( \frac{\pi C 
+\commentmathwithtext<+->[position={(-60:2cm)}]{V_g}{Gate voltage}
+}{\lvert e \rvert} + k_F L \right) \right]^2
+\end{multline*}
+}% uncover
+}%% end of the group for change of style
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Fleeting box}
+%\framesubtitle{}
+%\setcounter{beamerpauses}{2}
+
+\uncover<+->{Text before}
+
+\begin{itemize}
+\item<+-> First item
+%% default style of the fleeting box
+\fleetingbox<.>{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada, odio et bibendum adipiscing, diam mi suscipit arcu, venenatis ullamcorper libero nulla non purus. Aliquam nulla justo, iaculis a vestibulum a, iaculis tristique nisl. Aenean tempus eros id purus convallis ac ornare elit tempor.}
+
+\item<+-> Second item
+%% change style of the appearance
+{\tikzset{append fleeting box style={top color=structure!5,bottom color=structure!20,xshift=15pt,yshift=10ex,text width=0.7\linewidth}}
+%\tikzset{append fleeting box style={top color=structure!5,bottom color=structure!20,anchor=south east,xshift=0pt,yshift=0pt,text width=0.7\linewidth,rotate=30}}
+\fleetingbox<.>{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada, odio et bibendum adipiscing, diam mi suscipit arcu, venenatis ullamcorper libero nulla non purus. Aliquam nulla justo, iaculis a vestibulum a, iaculis tristique nisl. Aenean tempus eros id purus convallis ac ornare elit tempor.}
+
+}% local redefinition of style
+
+\item<+-> Third item
+%% change style in the optionnal argument
+\fleetingbox<.>[draw=red,line width=2pt,text width=0.8\linewidth,fill=none,font=\small\slshape]{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer malesuada, odio et bibendum adipiscing, diam mi suscipit arcu, venenatis ullamcorper libero nulla non purus. Aliquam nulla justo, iaculis a vestibulum a, iaculis tristique nisl. Aenean tempus eros id purus convallis ac ornare elit tempor.}
+\end{itemize}
+
+\uncover<+->{Text after}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Highlight node}
+%\framesubtitle{}
+%\setcounter{beamerpauses}{2}
+
+
+\begin{itemize}
+\item<+-> Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+\begin{align*}
+\inserthightlightnode{node integral left}{\vphantom{$\displaystyle \int_a^b$}} 
+\int_a^b f(x) dx 
+\inserthightlightnode{node integral right}{\vphantom{$\displaystyle \int_a^b$}}
+&= 10 \\[4pt]
+\inserthightlightnode{node sum left}{\vphantom{$\displaystyle \sum_{n=0}^{\infty}$}} 
+\sum_{n=0}^{\infty} a_n 
+\inserthightlightnode{node sum right}{\vphantom{$\displaystyle \sum_{n=0}^{\infty}$}}
+&= 10
+\end{align*}
+
+\item<+-> Integer malesuada, odio et bibendum adipiscing, diam mi suscipit arcu, venenatis ullamcorper libero nulla non purus.
+
+\item<+->  Aliquam nulla justo, iaculis a vestibulum a, iaculis tristique nisl. 
+
+\end{itemize}
+
+\hightlightnode<+-.(2)>{(node integral left) (node integral right)}%
+\uncover<+->{Aenean tempus eros id purus convallis ac ornare elit tempor.}%
+\hightlightnode<+-.(1)>{(node sum left) (node sum right)}%
+{\tikzset{append highlight node style={inner sep=1pt,line width=1pt,draw=blue,fill=blue!20,opacity=0.3}}%
+\hightlightnode<+>{(node integral left) (node sum right)}}%
+
+\uncover<+->{Aenean tempus eros id purus convallis ac ornare elit tempor.}%
+%% possible to create links between nodes
+\uncover<.->{\tikz[remember picture,overlay]{%
+\node[highlight node style,align=left,fit=(node integral left) (node integral right)] (node integral) {};%
+\node[highlight node style,align=left,fit=(node sum left) (node sum right)] (node sum) {};%
+\draw[red,line width=1.5pt,<->,rounded corners=3pt] (node sum) -- ($(node sum)+(-2cm,0pt)$) |- (node integral);
+}}
+
+\end{frame}
+
+
+
+
+
+\end{document}
+
